@@ -4,11 +4,10 @@ import {Formik} from 'formik';
 import * as yup from 'yup';
 import {Form} from "react-bootstrap";
 import {useRef, useState} from "react";
-import {toggleIsMonthlyPaymentAvaliable, updateMonthlyPayment} from "../../data/mortageCalculatorReducer";
-
 
 const MortageCalculator = (props) => {
-    // const [moneyBorrowed, setMoneyBorrowed] = useState(0);
+
+    // inner state to access variables avalialbe only in form, to display it later when calculating monthly payment
     const [moneyBorrowedAfterDownPayment, setMoneyBorrowedAfterDownPayment] = useState(0);
 
     const loanInput = useRef(null);
