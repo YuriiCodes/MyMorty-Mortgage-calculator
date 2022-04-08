@@ -67,6 +67,7 @@ const NewBankForm = (props) => {
                                           placeholder="Monobank"
                                           aria-describedby="validationFormikBankName"
                                           name="bankName"
+                                          value={props.newBank.name}
                                           ref={inputEl}
                                           onChange={(e) => {
                                               handleChange(e);
@@ -89,6 +90,8 @@ const NewBankForm = (props) => {
                                             placeholder="2.3"
                                             aria-describedby="inputGroupInterestRate"
                                             name="interestRate"
+                                            value={props.newBank.interestRate}
+
                                             onChange={(e) => {
                                                 handleChange(e);
                                                 handeBankInterestChange(e);
@@ -108,6 +111,7 @@ const NewBankForm = (props) => {
                         <InputGroup hasValidation id="inputGroupMaxLoan">
                             <Form.Control type="number"
                                           placeholder="400000"
+                                          value={props.newBank.maxLoan}
                                           name="maxLoan"
                                           // value={values.maxLoan}
 
@@ -132,7 +136,7 @@ const NewBankForm = (props) => {
                             <Form.Control type="number"
                                           placeholder="30000"
                                           name="minDownPayment"
-
+                                          value={props.newBank.minDownPayment}
                                           onChange={e => {
                                               handleChange(e);
                                               handleBankMinDownPaymentChange(e);
@@ -153,7 +157,7 @@ const NewBankForm = (props) => {
                             <Form.Control type="number"
                                           placeholder="36"
                                           name="loanTerm"
-
+                                            value={props.newBank.loanTerm}
                                           onChange={e => {
                                               handleChange(e);
                                               handleBankLoanTermChange(e);
