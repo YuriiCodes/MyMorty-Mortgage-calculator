@@ -31,7 +31,7 @@ const NewBankForm = (props) => {
     const handleBankLoanTermChange = (e) => {
         props.updateNewBankLoanTerm(e.target.value);
     }
-
+    debugger;
     return (
         <Formik
             validationSchema={schema}

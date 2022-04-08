@@ -21,7 +21,8 @@ const BanksContainer = (props) => {
                updateNewBankMinDownPayment={props.updateNewBankMinDownPayment}
                updateNewBankLoanTerm={props.updateNewBankLoanTerm}
                addBank={props.addBank}
-               newBankName={props.newBankName}
+
+               newBank={props.newBank}
 
         />
     )
@@ -30,7 +31,7 @@ let mapStateToProps = (state) => {
     return {
         banks: state.banksInfo.banks,
         latestBankId: state.banksInfo.banks[state.banksInfo.banks.length - 1].id,
-        newBankName: state.banksInfo.newBankName,
+        newBank:state.banksInfo.newBank,
     }
 }
 

@@ -57,8 +57,8 @@ const Banks = (props) => {
                                  updateNewBankMinDownPayment={props.updateNewBankMinDownPayment}
                                  updateNewBankLoanTerm={props.updateNewBankLoanTerm}
                                  addBank={props.addBank}
-                                 newBankName={props.newBankName}
 
+                                 newBank={props.newBank}
 
                     />
                     </Card>
