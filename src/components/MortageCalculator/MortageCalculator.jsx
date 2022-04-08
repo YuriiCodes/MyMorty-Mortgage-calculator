@@ -67,7 +67,7 @@ const MortageCalculator = (props) => {
                             props.toggleIsMonthlyPaymentAvaliable(true);
                         }
                     }}>
-                        <h1>Calculate mortage</h1>
+                        <h1>Calculate monthly payment</h1>
 
                         <Form.Group controlId="validationFormikUsername">
                             <Form.Label>Select desired bank:</Form.Label>
