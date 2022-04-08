@@ -12,13 +12,13 @@ const MortageCalculator = (props) => {
     let banks = props.banks;
 
     const selectedBank = banks.find(bank => bank.id === parseInt(props.selectedBankId));
-    debugger
+
     const schema = yup.object().shape({
         initialLoan: yup.number().required().positive().max(selectedBank.maxLoan),
         downPayment: yup.number().required().positive().min(selectedBank.minDownPayment),
         bankName: yup.string().required()
     });
-    debugger;
+
     return (
         <Formik
             validationSchema={schema}
@@ -42,10 +42,22 @@ const MortageCalculator = (props) => {
                     let inputedLoan = loanInput.current.value;
                     let inputedDownPayment = downPaymentInput.current.value;
                     if(!errors.initialLoan && !errors.downPayment && inputedLoan !== "" && inputedDownPayment !== "") {
-                        alert("valid")
+                        console.log(`Ammount borrowed: ${inputedLoan}`);
+
+                        let ammountBorrowedAfterDownPayment = parseFloat(inputedLoan) - parseFloat(inputedDownPayment);
+                        console.log(`Ammount borrowed after down payment: ${ammountBorrowedAfterDownPayment}`);
+
+                        let annualInterestRate = selectedBank.interestRate;
+                        console.log(`Annual interest rate: ${annualInterestRate}`);
+
+                        let numberOfMonthlyPayments = selectedBank.loanTerm;
+                        console.log('Number of monthly payments: ' + numberOfMonthlyPayments);
+
+                        let monthlyPayment = (ammountBorrowedAfterDownPayment * (annualInterestRate / 12) * ((1 + annualInterestRate/12 )**numberOfMonthlyPayments) ) / (((1 + annualInterestRate/12 )**numberOfMonthlyPayments) - 1)
+                        console.log(`Montly payment is: ${monthlyPayment}`)
                     }
                 }}>
-                    <h1>Calculate loan</h1>
+                    <h1>Calculate mortage</h1>
 
                     <Form.Group  controlId="validationFormikUsername">
                         <Form.Label>Select desired bank:</Form.Label>
