@@ -1,4 +1,4 @@
-import {Button, Card, CardGroup, Container, ListGroup, ListGroupItem, Row, Form, Col} from "react-bootstrap";
+import {Button, Card, CardGroup, Container, ListGroup, ListGroupItem, Row, Form, Col, Offcanvas} from "react-bootstrap";
 import {
     addBank,
     deleteBank,
@@ -7,11 +7,19 @@ import {
     updateNewBankName
 } from "../../data/banksReducer";
 import NewBankForm from "./NewBankForm/NewBankForm";
+import {useState} from "react";
 
 
 const Banks = (props) => {
 
     const banks = props.banks;
+
+    // variables needed for update bank offcanvas form
+    const [show, setShow] = useState(false);
+    const [bankUserWantToUpdate, setBankUserWantToUpdate] = useState({});
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     return (
         <Container className="mt-4">
             <Row>
@@ -37,10 +45,38 @@ const Banks = (props) => {
                                         <Card.Body>
                                             {/*<Card.Link href="#">Card Link</Card.Link>*/}
                                             {/*<Card.Link as={Button} href="#">Another Link</Card.Link>*/}
-                                            <Button variant="outline-secondary">Edit bank</Button>
+                                            <Button variant="outline-secondary"  onClick={(e) => {
+                                                handleShow();
+                                                setBankUserWantToUpdate(bank);
+                                            }}>Edit bank</Button>
                                             <Button variant="outline-danger" onClick={() => {
                                                 props.deleteBank(bank.id)
                                             }}>Delete bank</Button>
+
+
+                                            <Offcanvas placement="end" show={show} onHide={handleClose} {...props}>
+                                                <Offcanvas.Header closeButton>
+                                                    <Offcanvas.Title>Edit {bankUserWantToUpdate.name} </Offcanvas.Title>
+                                                </Offcanvas.Header>
+                                                <Offcanvas.Body>
+                                                    //TODO: add two form types in NewBankForm,  implement edit bank form, add main page content.
+                                                    <NewBankForm updateNewBankName={props.updateNewBankName}
+                                                                 updateNewBankDescription={props.updateNewBankDescription}
+                                                                 updateNewBankInterestRate={props.updateNewBankInterestRate}
+                                                                 updateNewBankMaxLoan={props.updateNewBankMaxLoan}
+                                                                 updateNewBankMinDownPayment={props.updateNewBankMinDownPayment}
+                                                                 updateNewBankLoanTerm={props.updateNewBankLoanTerm}
+                                                                 addBank={props.addBank}
+
+                                                                 newBank={props.newBank}
+
+                                                    />
+                                                    Some text as placeholder. In real life you can have the elements you
+                                                    have chosen. Like, text, images, lists, etc.
+                                                </Offcanvas.Body>
+                                            </Offcanvas>
+
+
                                         </Card.Body>
                                     </Card>
                                 </Col>
