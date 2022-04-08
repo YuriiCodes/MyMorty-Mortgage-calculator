@@ -3,16 +3,19 @@ import {Button, Col, FloatingLabel, InputGroup, Row} from "react-bootstrap";
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import {Form} from "react-bootstrap";
+import {useRef} from "react";
 
 
 const MortageCalculator = (props) => {
+    const loanInput = useRef(null);
+    const downPaymentInput = useRef(null);
     let banks = props.banks;
 
     const selectedBank = banks.find(bank => bank.id === parseInt(props.selectedBankId));
     debugger
     const schema = yup.object().shape({
         initialLoan: yup.number().required().positive().max(selectedBank.maxLoan),
-        downPayment: yup.number().required().positive(),
+        downPayment: yup.number().required().positive().min(selectedBank.minDownPayment),
         bankName: yup.string().required()
     });
     debugger;
@@ -36,6 +39,11 @@ const MortageCalculator = (props) => {
               }) => (
                 <Form className="p-2" noValidate onSubmit={(e) => {
                     handleSubmit(e);
+                    let inputedLoan = loanInput.current.value;
+                    let inputedDownPayment = downPaymentInput.current.value;
+                    if(!errors.initialLoan && !errors.downPayment && inputedLoan !== "" && inputedDownPayment !== "") {
+                        alert("valid")
+                    }
                 }}>
                     <h1>Calculate loan</h1>
 
@@ -57,7 +65,7 @@ const MortageCalculator = (props) => {
                             <Form.Control type="number"
                                           placeholder="400000"
                                           name="initialLoan"
-                                value={values.initialLoan}
+                                          ref={loanInput}
 
                                           onChange={e => {
                                               handleChange(e);
@@ -78,6 +86,7 @@ const MortageCalculator = (props) => {
                         <Form.Label>Down payment, $</Form.Label>
                         <InputGroup hasValidation id="inputGroupMinDownPayment">
                             <Form.Control type="number"
+                                          ref={downPaymentInput}
                                           placeholder="30000"
                                           name="downPayment"
                                           onChange={e => {
@@ -85,7 +94,7 @@ const MortageCalculator = (props) => {
                                           }}
                                           aria-describedby="inputGroupMinDownPayment"
                                           isInvalid={!!errors.downPayment }
-                                          value={values.downPayment}
+
                             />
                             <Form.Control.Feedback type="invalid">
                                 {errors.downPayment}
@@ -96,7 +105,7 @@ const MortageCalculator = (props) => {
 
 
                     <Button variant="primary" type="submit">
-                        Add bank
+                        Calculate mortage
                     </Button>
                 </Form>
             )}
