@@ -1,14 +1,14 @@
 import {connect} from "react-redux";
-import MortageCalculator from "./MortageCalculator";
+import MortgageCalculator from "./MortgageCalculator";
 import {
     toggleIsMonthlyPaymentAvaliable,
     updateMonthlyPayment,
     updateSelectedBankId
 } from "../../data/mortageCalculatorReducer";
 
-const MortageCalculatorContainer = (props) => {
+const MortgageCalculatorContainer = (props) => {
     return (
-        <MortageCalculator
+        <MortgageCalculator
             banks={props.banks}
             updateSelectedBankId={props.updateSelectedBankId}
             selectedBankId={props.selectedBankId}
@@ -27,4 +27,4 @@ const mapStateToProps = (state) => {
         monthlyPayment: state.mortageCalculator.monthlyPayment
     }
 }
-export default connect(mapStateToProps, {updateSelectedBankId, toggleIsMonthlyPaymentAvaliable, updateMonthlyPayment})(MortageCalculatorContainer)
+export default connect(mapStateToProps, {updateSelectedBankId, toggleIsMonthlyPaymentAvaliable, updateMonthlyPayment})(MortgageCalculatorContainer)

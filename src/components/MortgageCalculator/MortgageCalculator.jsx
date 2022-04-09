@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import {Form} from "react-bootstrap";
 import {useRef, useState} from "react";
 
-const MortageCalculator = (props) => {
+const MortgageCalculator = (props) => {
 
     // inner state to access variables avalialbe only in form, to display it later when calculating monthly payment
     const [moneyBorrowedAfterDownPayment, setMoneyBorrowedAfterDownPayment] = useState(0);
@@ -128,7 +128,7 @@ const MortageCalculator = (props) => {
 
 
                                 <Button variant="primary" type="submit">
-                                    Calculate mortage
+                                    Calculate mortgage
                                 </Button>
                             </Form>
                         )}
@@ -168,5 +168,5 @@ const MortageCalculator = (props) => {
         </Container>
     );
 }
-export default MortageCalculator;
+export default MortgageCalculator;
 
