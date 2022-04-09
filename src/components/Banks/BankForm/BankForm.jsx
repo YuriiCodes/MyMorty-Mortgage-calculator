@@ -104,7 +104,7 @@ const BankForm = (props) => {
 
 
                 }}>
-                    {type===ADD?<h1>Add bank</h1> : <h1>Edit bank</h1>}
+                    {type===ADD?<h1>Add bank</h1> : null}
 
                     <Form.Group className="mb-2" controlId="validationFormikBankName">
                         <Form.Label>Bank name</Form.Label>
