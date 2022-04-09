@@ -9,6 +9,7 @@ const UPDATE_NEW_BANK_MIN_DOWN_PAYMENT = 'UPDATE_NEW_BANK_MIN_DOWN_PAYMENT';
 const UPDATE_NEW_BANK_LOAN_TERM = 'UPDATE_NEW_BANK_LOAN_TERM';
 const UPDATE_NEW_BANK_LOGO = 'UPDATE_NEW_BANK_LOGO';
 const ADD_BANK = 'ADD_BANK';
+const EDIT_EXISTING_BANK = 'EDIT_EXISTING_BANK';
 
 let initialState = {
     banks: [
@@ -121,6 +122,23 @@ const banksReducer = (state = initialState, action) => {
                     logo: ""
                 }
             };
+        case EDIT_EXISTING_BANK:
+            return {
+                ...state, banks: state.banks.map(bank => {
+                    if (bank.id === action.bankId) {
+                        return {
+                            ...bank,
+                            name: action.name,
+                            interestRate: action.interestRate,
+                            maxLoan: action.maxLoan,
+                            minDownPayment: action.minDownPayment,
+                            loanTerm: action.loanTerm
+                        }
+                    } else {
+                        return bank;
+                    }
+                })
+            };
         default:
             return state;
     }
@@ -178,5 +196,16 @@ export const updateNewBankLoanTerm = (loanTerm) => {
 export const addBank = () => {
     return {
         type: ADD_BANK
+    };
+};
+export const editExistingBank = (bankId, name,  interestRate, maxLoan, minDownPayment, loanTerm) => {
+    return {
+        type: EDIT_EXISTING_BANK,
+        bankId,
+        name,
+        interestRate,
+        maxLoan,
+        minDownPayment,
+        loanTerm
     };
 };

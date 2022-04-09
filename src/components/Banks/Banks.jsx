@@ -1,22 +1,22 @@
 import {Button, Card, CardGroup, Container, ListGroup, ListGroupItem, Row, Form, Col, Offcanvas} from "react-bootstrap";
 import {
     addBank,
-    deleteBank,
+    deleteBank, editExistingBank,
     updateNewBankDescription,
     updateNewBankInterestRate, updateNewBankLoanTerm, updateNewBankMaxLoan, updateNewBankMinDownPayment,
     updateNewBankName
 } from "../../data/banksReducer";
 import NewBankForm from "./NewBankForm/NewBankForm";
 import {useState} from "react";
+import UpdateBankForm from "./UpdateBankForm/UpdateBankForm";
 
 
 const Banks = (props) => {
-
     const banks = props.banks;
 
     // variables needed for update bank offcanvas form
     const [show, setShow] = useState(false);
-    const [bankUserWantToUpdate, setBankUserWantToUpdate] = useState({});
+    const [bankUserWantsToUpdate, setBankUserWantsToUpdate] = useState({});
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
@@ -47,7 +47,7 @@ const Banks = (props) => {
                                             {/*<Card.Link as={Button} href="#">Another Link</Card.Link>*/}
                                             <Button variant="outline-secondary"  onClick={(e) => {
                                                 handleShow();
-                                                setBankUserWantToUpdate(bank);
+                                                setBankUserWantsToUpdate(bank);
                                             }}>Edit bank</Button>
                                             <Button variant="outline-danger" onClick={() => {
                                                 props.deleteBank(bank.id)
@@ -56,23 +56,27 @@ const Banks = (props) => {
 
                                             <Offcanvas placement="end" show={show} onHide={handleClose} {...props}>
                                                 <Offcanvas.Header closeButton>
-                                                    <Offcanvas.Title>Edit {bankUserWantToUpdate.name} </Offcanvas.Title>
+                                                    <Offcanvas.Title>Edit {bankUserWantsToUpdate.name} </Offcanvas.Title>
                                                 </Offcanvas.Header>
                                                 <Offcanvas.Body>
-                                                    //TODO: add two form types in NewBankForm,  implement edit bank form, add main page content.
-                                                    <NewBankForm updateNewBankName={props.updateNewBankName}
-                                                                 updateNewBankDescription={props.updateNewBankDescription}
-                                                                 updateNewBankInterestRate={props.updateNewBankInterestRate}
-                                                                 updateNewBankMaxLoan={props.updateNewBankMaxLoan}
-                                                                 updateNewBankMinDownPayment={props.updateNewBankMinDownPayment}
-                                                                 updateNewBankLoanTerm={props.updateNewBankLoanTerm}
-                                                                 addBank={props.addBank}
 
-                                                                 newBank={props.newBank}
+                                                    {/*<NewBankForm updateNewBankName={props.updateNewBankName}*/}
+                                                    {/*             updateNewBankDescription={props.updateNewBankDescription}*/}
+                                                    {/*             updateNewBankInterestRate={props.updateNewBankInterestRate}*/}
+                                                    {/*             updateNewBankMaxLoan={props.updateNewBankMaxLoan}*/}
+                                                    {/*             updateNewBankMinDownPayment={props.updateNewBankMinDownPayment}*/}
+                                                    {/*             updateNewBankLoanTerm={props.updateNewBankLoanTerm}*/}
+                                                    {/*             addBank={props.addBank}*/}
 
+                                                    {/*             newBank={props.newBank}*/}
+
+                                                    {/*/>*/}
+
+
+                                                    <UpdateBankForm
+                                                        editExistingBank={props.editExistingBank}
+                                                        bankUserWantsToUpdate={bankUserWantsToUpdate}
                                                     />
-                                                    Some text as placeholder. In real life you can have the elements you
-                                                    have chosen. Like, text, images, lists, etc.
                                                 </Offcanvas.Body>
                                             </Offcanvas>
 

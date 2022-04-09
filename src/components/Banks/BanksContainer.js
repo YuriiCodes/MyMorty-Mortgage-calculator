@@ -2,7 +2,7 @@ import {connect} from "react-redux";
 import Banks from "./Banks";
 import {
     addBank,
-    deleteBank,
+    deleteBank, editExistingBank,
     getBanks,
     updateNewBankDescription,
     updateNewBankInterestRate, updateNewBankLoanTerm, updateNewBankMaxLoan, updateNewBankMinDownPayment,
@@ -23,6 +23,7 @@ const BanksContainer = (props) => {
                addBank={props.addBank}
 
                newBank={props.newBank}
+               editExistingBank={props.editExistingBank}
 
         />
     )
@@ -43,5 +44,6 @@ export default connect(mapStateToProps, {
     updateNewBankMaxLoan,
     updateNewBankMinDownPayment,
     updateNewBankLoanTerm,
-    addBank
+    addBank,
+    editExistingBank
 })(BanksContainer);
