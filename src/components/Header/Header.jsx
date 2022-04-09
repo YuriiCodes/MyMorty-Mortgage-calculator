@@ -12,7 +12,7 @@ const Header = (props) => {
 
                       <Nav.Link as={NavLink} to="/banks">View available banks</Nav.Link>
 
-                    <Nav.Link  as={NavLink} to="/mortageCalculator">Mortage calculator</Nav.Link>
+                    <Nav.Link  as={NavLink} to="/mortgageCalculator">Mortgage calculator</Nav.Link>
                 </Nav>
             </Container>
         </Navbar>
