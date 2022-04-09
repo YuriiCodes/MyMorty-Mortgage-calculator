@@ -3,8 +3,6 @@ import Banks from "./Banks";
 import {
     addBank,
     deleteBank, editExistingBank,
-    getBanks,
-    updateNewBankDescription,
     updateNewBankInterestRate, updateNewBankLoanTerm, updateNewBankMaxLoan, updateNewBankMinDownPayment,
     updateNewBankName
 } from "../../data/banksReducer";
@@ -37,7 +35,6 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    getBanks,
     deleteBank,
     updateNewBankName,
     updateNewBankInterestRate,
