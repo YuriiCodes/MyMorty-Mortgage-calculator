@@ -1,6 +1,7 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+It also was published to GitHub Pages, so you can view it [Here](https://yuriicodes.github.io/MyMorty-Mortgage-calculator/)
 
 ## Available Scripts
 
