@@ -20,7 +20,13 @@ const App = () => (
             <Routes>
                 <Route exact path="/"
                        element={<ServiceInfo />}/>
+
+
+                {/*Route for GitHub Pages*/}
+                <Route  path="MyMorty-Mortgage-calculator"
+                       element={<ServiceInfo />}/>
                 <Route path="banks" element={<BanksContainer />}/>
+
                 <Route path="mortgageCalculator" element={<MortageCalculatorContainer />}/>
             </Routes>
 
