@@ -138,7 +138,8 @@ const MortgageCalculator = (props) => {
                     ? <Col md={6} className="mt-4">
                         <Card>
                             <Card.Body>
-                                <Card.Title><h2> Your monthly payment is: <span className="text-success">${props.monthlyPayment} </span> </h2></Card.Title>
+                                //we round the monthly payment to the nearest hundredth
+                                <Card.Title><h2> Your monthly payment is: <span className="text-success">${props.monthlyPayment.toFixed(3)} </span> </h2></Card.Title>
                                 <Card.Text>
                                     <p>Ammount of borrowed money after down payment:
                                         ${moneyBorrowedAfterDownPayment} </p>

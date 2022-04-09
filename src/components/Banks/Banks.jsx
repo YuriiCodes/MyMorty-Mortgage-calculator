@@ -14,14 +14,14 @@ const Banks = (props) => {
     const handleShow = () => setShow(true);
 
     return (
-        <Container className="mt-4">
+        <Container className="mt-4" >
             <Row>
                 <Col md={8}>
-                    <Row xs={1} md={2} lg={3} className="g-4">
+                    <Row xs={1} md={2} lg={3} className="g-4border">
                         {banks.map(bank => {
                             return (
-                                <Col key={bank.id}>
-                                    <Card style={{width: '15rem'}}>
+                                <Col key={bank.id} className="d-flex justify-content-center" >
+                                    <Card style={{width: '17rem'}} >
                                         {/*<Card.Img variant="top" src={bank.logo}/>*/}
                                         <Card.Body>
                                             <Card.Title>{bank.name}</Card.Title>

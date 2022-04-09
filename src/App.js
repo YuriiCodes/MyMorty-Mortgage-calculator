@@ -23,8 +23,10 @@ const App = () => (
                 <Route path="banks" element={<BanksContainer />}/>
                 <Route path="mortageCalculator" element={<MortageCalculatorContainer />}/>
             </Routes>
+
         </Container>
         <Footer />
+
 
     </div>
     </BrowserRouter>

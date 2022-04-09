@@ -1,9 +1,9 @@
 import {combineReducers, createStore} from "redux";
 import banksReducer from "./banksReducer";
-import mortageCalculatorReducer from "./mortageCalculatorReducer";
+import mortgageCalculatorReducer from "./mortgageCalculatorReducer";
 let reducers = combineReducers({
     banksInfo: banksReducer,
-    mortageCalculator: mortageCalculatorReducer
+    mortageCalculator: mortgageCalculatorReducer
 });
 
 let store = createStore(reducers);

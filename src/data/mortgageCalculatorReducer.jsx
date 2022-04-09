@@ -7,7 +7,7 @@ let initialState = {
     monthlyPayment:0,
 };
 
-const mortageCalculatorReducer = (state = initialState, action) => {
+const mortgageCalculatorReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case UPDATE_SELECTED_BANK_ID:
@@ -43,4 +43,4 @@ export  const updateMonthlyPayment = (monthlyPayment) => ({
     monthlyPayment
 });
 
-export default mortageCalculatorReducer;
+export default mortgageCalculatorReducer;

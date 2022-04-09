@@ -4,7 +4,7 @@ import {
     toggleIsMonthlyPaymentAvaliable,
     updateMonthlyPayment,
     updateSelectedBankId
-} from "../../data/mortageCalculatorReducer";
+} from "../../data/mortgageCalculatorReducer";
 
 const MortgageCalculatorContainer = (props) => {
     return (
