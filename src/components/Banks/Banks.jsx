@@ -1,14 +1,7 @@
 import {Button, Card, CardGroup, Container, ListGroup, ListGroupItem, Row, Form, Col, Offcanvas} from "react-bootstrap";
-import {
-    addBank,
-    deleteBank, editExistingBank,
-    updateNewBankDescription,
-    updateNewBankInterestRate, updateNewBankLoanTerm, updateNewBankMaxLoan, updateNewBankMinDownPayment,
-    updateNewBankName
-} from "../../data/banksReducer";
-import NewBankForm from "./NewBankForm/NewBankForm";
+
+import BankForm from "./BankForm/BankForm";
 import {useState} from "react";
-import UpdateBankForm from "./UpdateBankForm/UpdateBankForm";
 
 
 const Banks = (props) => {
@@ -23,12 +16,12 @@ const Banks = (props) => {
     return (
         <Container className="mt-4">
             <Row>
-                <Col md={8} >
-                    <Row xs={1} md={2} lg={3}  className="g-4">
+                <Col md={8}>
+                    <Row xs={1} md={2} lg={3} className="g-4">
                         {banks.map(bank => {
                             return (
                                 <Col key={bank.id}>
-                                    <Card  style={{width: '15rem'}}>
+                                    <Card style={{width: '15rem'}}>
                                         {/*<Card.Img variant="top" src={bank.logo}/>*/}
                                         <Card.Body>
                                             <Card.Title>{bank.name}</Card.Title>
@@ -39,13 +32,12 @@ const Banks = (props) => {
                                         <ListGroup className="list-group-flush">
                                             <ListGroupItem>Interest rate: <b>{bank.interestRate}%</b></ListGroupItem>
                                             <ListGroupItem>Max loan: <b>${bank.maxLoan}</b></ListGroupItem>
-                                            <ListGroupItem>Minimal down payment: <b>${bank.minDownPayment}</b></ListGroupItem>
+                                            <ListGroupItem>Minimal down
+                                                payment: <b>${bank.minDownPayment}</b></ListGroupItem>
                                             <ListGroupItem>Loan term: <b>{bank.loanTerm} months</b></ListGroupItem>
                                         </ListGroup>
                                         <Card.Body>
-                                            {/*<Card.Link href="#">Card Link</Card.Link>*/}
-                                            {/*<Card.Link as={Button} href="#">Another Link</Card.Link>*/}
-                                            <Button variant="outline-secondary"  onClick={(e) => {
+                                            <Button variant="outline-secondary" onClick={(e) => {
                                                 handleShow();
                                                 setBankUserWantsToUpdate(bank);
                                             }}>Edit bank</Button>
@@ -59,23 +51,11 @@ const Banks = (props) => {
                                                     <Offcanvas.Title>Edit {bankUserWantsToUpdate.name} </Offcanvas.Title>
                                                 </Offcanvas.Header>
                                                 <Offcanvas.Body>
+                                                    <BankForm handleClose={handleClose}
+                                                              type="update"
+                                                              editExistingBank={props.editExistingBank}
+                                                              bankUserWantsToUpdate={bankUserWantsToUpdate}
 
-                                                    {/*<NewBankForm updateNewBankName={props.updateNewBankName}*/}
-                                                    {/*             updateNewBankDescription={props.updateNewBankDescription}*/}
-                                                    {/*             updateNewBankInterestRate={props.updateNewBankInterestRate}*/}
-                                                    {/*             updateNewBankMaxLoan={props.updateNewBankMaxLoan}*/}
-                                                    {/*             updateNewBankMinDownPayment={props.updateNewBankMinDownPayment}*/}
-                                                    {/*             updateNewBankLoanTerm={props.updateNewBankLoanTerm}*/}
-                                                    {/*             addBank={props.addBank}*/}
-
-                                                    {/*             newBank={props.newBank}*/}
-
-                                                    {/*/>*/}
-
-
-                                                    <UpdateBankForm
-                                                        editExistingBank={props.editExistingBank}
-                                                        bankUserWantsToUpdate={bankUserWantsToUpdate}
                                                     />
                                                 </Offcanvas.Body>
                                             </Offcanvas>
@@ -88,19 +68,20 @@ const Banks = (props) => {
                         })}
                     </Row>
                 </Col>
-                <Col md={4} >
+                <Col md={4}>
                     <Card border="success">
-                    <NewBankForm updateNewBankName={props.updateNewBankName}
-                                 updateNewBankDescription={props.updateNewBankDescription}
-                                 updateNewBankInterestRate={props.updateNewBankInterestRate}
-                                 updateNewBankMaxLoan={props.updateNewBankMaxLoan}
-                                 updateNewBankMinDownPayment={props.updateNewBankMinDownPayment}
-                                 updateNewBankLoanTerm={props.updateNewBankLoanTerm}
-                                 addBank={props.addBank}
+                        <BankForm type="add"
+                                  updateNewBankName={props.updateNewBankName}
+                                  updateNewBankDescription={props.updateNewBankDescription}
+                                  updateNewBankInterestRate={props.updateNewBankInterestRate}
+                                  updateNewBankMaxLoan={props.updateNewBankMaxLoan}
+                                  updateNewBankMinDownPayment={props.updateNewBankMinDownPayment}
+                                  updateNewBankLoanTerm={props.updateNewBankLoanTerm}
+                                  addBank={props.addBank}
 
-                                 newBank={props.newBank}
+                                  newBank={props.newBank}
 
-                    />
+                        />
                     </Card>
                 </Col>
 

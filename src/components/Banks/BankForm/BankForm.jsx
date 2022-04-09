@@ -1,7 +1,7 @@
 import {Button, Form, InputGroup} from "react-bootstrap";
 import {Formik} from 'formik';
 import * as yup from 'yup';
-import {useRef} from "react";
+import {useRef, useState} from "react";
 
 const schema = yup.object().shape({
     bankName: yup.string().required(),
@@ -11,25 +11,55 @@ const schema = yup.object().shape({
     loanTerm: yup.number().required().positive(),
 });
 
-const NewBankForm = (props) => {
+const BankForm = (props) => {
     const inputEl = useRef(null);
+    const type = props.type;
+
+
+    // we use local state to store values that user enters while updating the bank
+    const [editedBankName, setEditedBankName] = useState("");
+    const [editedBankInterestRate, setEditedBankInterestRate] = useState(null);
+    const [editedBankMaxLoan, setEditedBankMaxLoan] = useState(null);
+    const [editedBankMinDownPayment, setEditedBankMinDownPayment] = useState(null);
+    const [editedBankLoanTerm, setEditedBankLoanTerm] = useState(null);
+
+    const ADD = "add";
+    const UPDATE = "update";
+
     const handleBankNameChange = (e) => {
-        props.updateNewBankName(e.target.value);
-    };
-    const handleBankDescriptionChange = (e) => {
-        props.updateNewBankDescription(e.target.value);
+        if(type===ADD){
+            props.updateNewBankName(e.target.value);
+        } else if(type===UPDATE){
+            setEditedBankName(e.target.value);
+        }
     };
     const handeBankInterestChange = (e) => {
-        props.updateNewBankInterestRate(e.target.value);
+        if(type===ADD) {
+            props.updateNewBankInterestRate(e.target.value);
+        } else if(type===UPDATE){
+            setEditedBankInterestRate(e.target.value);
+        }
     }
     const handleBankMaxLoanChange = (e) => {
-        props.updateNewBankMaxLoan(e.target.value);
+        if(type===ADD) {
+            props.updateNewBankMaxLoan(e.target.value);
+        } else if(type===UPDATE){
+            setEditedBankMaxLoan(e.target.value);
+        }
     }
     const handleBankMinDownPaymentChange = (e) => {
-        props.updateNewBankMinDownPayment(e.target.value);
+        if(type===ADD) {
+            props.updateNewBankMinDownPayment(e.target.value);
+        } else if(type===UPDATE){
+            setEditedBankMinDownPayment(e.target.value);
+        }
     }
     const handleBankLoanTermChange = (e) => {
-        props.updateNewBankLoanTerm(e.target.value);
+        if(type===ADD) {
+            props.updateNewBankLoanTerm(e.target.value);
+        } else if(type===UPDATE){
+            setEditedBankLoanTerm(e.target.value);
+        }
     }
     return (
         <Formik
@@ -52,22 +82,38 @@ const NewBankForm = (props) => {
               }) => (
                 <Form className="p-2" noValidate onSubmit={(e) => {
                     handleSubmit(e);
-                    console.log(inputEl.current.value);
-                    if(inputEl.current.value && !errors.bankName && !errors.interestRate && !errors.maxLoan && !errors.minDownPayment && !errors.loanTerm) {
-                        props.addBank();
+                    if(type===ADD){
+                        if(inputEl.current.value && !errors.bankName && !errors.interestRate && !errors.maxLoan && !errors.minDownPayment && !errors.loanTerm) {
+                            props.addBank();
+                        }
+                    }
+                    else if(type===UPDATE){
+                        if(inputEl.current.value && !errors.bankName && !errors.interestRate && !errors.maxLoan && !errors.minDownPayment && !errors.loanTerm) {
+                            props.editExistingBank(
+                                props.bankUserWantsToUpdate.id,
+                                editedBankName,
+                                editedBankInterestRate,
+                                editedBankMaxLoan,
+                                editedBankMinDownPayment,
+                                editedBankLoanTerm,
+                            );
+                            // close the modal if update successfull
+                            props.handleClose();
+                        }
                     }
 
+
                 }}>
-                    <h1>Add bank</h1>
+                    {type===ADD?<h1>Add bank</h1> : <h1>Edit bank</h1>}
 
                     <Form.Group className="mb-2" controlId="validationFormikBankName">
                         <Form.Label>Bank name</Form.Label>
                         <InputGroup hasValidation id="validationFormikBankName">
                             <Form.Control type="text"
-                                          placeholder="Monobank"
+                                          placeholder={type===ADD?"Monobank":props.bankUserWantsToUpdate.name }
                                           aria-describedby="validationFormikBankName"
                                           name="bankName"
-                                          value={props.newBank.name}
+                                          value={type===ADD? props.newBank.name : editedBankName}
                                           ref={inputEl}
                                           onChange={(e) => {
                                               handleChange(e);
@@ -87,10 +133,10 @@ const NewBankForm = (props) => {
                         <Form.Label>Interest rate, %</Form.Label>
                         <InputGroup hasValidation id="inputGroupInterestRate">
                               <Form.Control type="number"
-                                            placeholder="2.3"
+                                            placeholder={type===ADD? "2.3": props.bankUserWantsToUpdate.interestRate}
                                             aria-describedby="inputGroupInterestRate"
                                             name="interestRate"
-                                            value={props.newBank.interestRate}
+                                            value={type===ADD? props.newBank.interestRate: editedBankInterestRate}
 
                                             onChange={(e) => {
                                                 handleChange(e);
@@ -110,8 +156,8 @@ const NewBankForm = (props) => {
                         <Form.Label>Max Loan, $</Form.Label>
                         <InputGroup hasValidation id="inputGroupMaxLoan">
                             <Form.Control type="number"
-                                          placeholder="400000"
-                                          value={props.newBank.maxLoan}
+                                          placeholder={type===ADD? "400000" : props.bankUserWantsToUpdate.maxLoan}
+                                          value={type===ADD? props.newBank.maxLoan : editedBankMaxLoan}
                                           name="maxLoan"
                                           // value={values.maxLoan}
 
@@ -134,9 +180,9 @@ const NewBankForm = (props) => {
                         <Form.Label>Min down payment, $</Form.Label>
                         <InputGroup hasValidation id="inputGroupMinDownPayment">
                             <Form.Control type="number"
-                                          placeholder="30000"
+                                          placeholder={type===ADD? "30000": props.bankUserWantsToUpdate.minDownPayment}
                                           name="minDownPayment"
-                                          value={props.newBank.minDownPayment}
+                                          value={type===ADD? props.newBank.minDownPayment: editedBankMinDownPayment}
                                           onChange={e => {
                                               handleChange(e);
                                               handleBankMinDownPaymentChange(e);
@@ -155,9 +201,9 @@ const NewBankForm = (props) => {
                         <Form.Label>Loan term, months</Form.Label>
                         <InputGroup hasValidation id="inputGroupLoanTerm">
                             <Form.Control type="number"
-                                          placeholder="36"
+                                          placeholder={type===ADD? "36": props.bankUserWantsToUpdate.loanTerm}
                                           name="loanTerm"
-                                            value={props.newBank.loanTerm}
+                                            value={type===ADD? props.newBank.loanTerm: editedBankLoanTerm}
                                           onChange={e => {
                                               handleChange(e);
                                               handleBankLoanTermChange(e);
@@ -171,13 +217,19 @@ const NewBankForm = (props) => {
                         </InputGroup>
                     </Form.Group>
 
+                    {type===ADD?
+                        <Button variant="primary" type="submit">
+                            Add
+                        </Button>
+                        :
+                        <Button variant="primary" type="submit">
+                            Update
+                        </Button>
+                    }
 
-                    <Button variant="primary" type="submit">
-                        Add bank
-                    </Button>
                 </Form>
             )}
         </Formik>
     )
 }
-export default NewBankForm;
+export default BankForm;
