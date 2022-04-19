@@ -35,30 +35,30 @@ const BankForm = (props) => {
     };
     const handeBankInterestChange = (e) => {
         if(type===ADD) {
-            props.updateNewBankInterestRate(e.target.value);
+            props.updateNewBankInterestRate(parseInt(e.target.value));
         } else if(type===UPDATE){
-            setEditedBankInterestRate(e.target.value);
+            setEditedBankInterestRate(parseInt(e.target.value));
         }
     }
     const handleBankMaxLoanChange = (e) => {
         if(type===ADD) {
-            props.updateNewBankMaxLoan(e.target.value);
+            props.updateNewBankMaxLoan(parseInt(e.target.value));
         } else if(type===UPDATE){
-            setEditedBankMaxLoan(e.target.value);
+            setEditedBankMaxLoan(parseInt(e.target.value));
         }
     }
     const handleBankMinDownPaymentChange = (e) => {
         if(type===ADD) {
-            props.updateNewBankMinDownPayment(e.target.value);
+            props.updateNewBankMinDownPayment(parseInt(e.target.value));
         } else if(type===UPDATE){
-            setEditedBankMinDownPayment(e.target.value);
+            setEditedBankMinDownPayment(parseInt(e.target.value));
         }
     }
     const handleBankLoanTermChange = (e) => {
         if(type===ADD) {
-            props.updateNewBankLoanTerm(e.target.value);
+            props.updateNewBankLoanTerm(parseInt(e.target.value));
         } else if(type===UPDATE){
-            setEditedBankLoanTerm(e.target.value);
+            setEditedBankLoanTerm(parseInt(e.target.value));
         }
     }
     return (
