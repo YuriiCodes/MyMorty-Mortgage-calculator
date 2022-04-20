@@ -1,41 +1,16 @@
 import Router from 'express';
-import Bank from "./Bank.js";
-
+import BankController from "./BankController.mjs";
 
 const router = new Router();
 
-router.post('/banks', async (req, res) => {
-    try{
-        const {name, interestRate, maxLoan, minDownPayment, loanTerm} = req.body;
-        const bank = await Bank.create({
-            name,
-            interestRate,
-            maxLoan,
-            minDownPayment,
-            loanTerm
-        });
+router.post('/banks', BankController.create);
 
-        res.json(bank);
-    } catch(e){
-        res.status(500).json(e);
-    }
-});
+router.get('/banks', BankController.getAll);
 
-router.get('/banks', (req, res) => {
-  res.send('banks');
-});
+router.get('/banks/:id', BankController.getOne);
 
+router.put('/banks', BankController.update);
 
-router.get('/banks:id', (req, res) => {
-    res.send('banks');
-});
-
-router.put('/banks', (req, res) => {
-  res.send('banks');
-});
-
-router.delete('/banks/:id', (req, res) => {
-  res.send('banks');
-});
+router.delete('/banks/:id', BankController.delete);
 
 export default router;
