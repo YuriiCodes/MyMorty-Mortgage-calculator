@@ -2,8 +2,8 @@ import express from 'express';
 import mongoose from "mongoose";
 import Bank from "./Bank.js";
 import router from "./router.mjs";
-import dotevn from "dotenv";
-dotevn.config();
+import dotenv from "dotenv";
+dotenv.config();
 
 const port = process.env.PORT || 8000;
 const password = process.env.PASSWORD;
