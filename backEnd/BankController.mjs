@@ -1,17 +1,10 @@
 import Bank from "./Bank.js";
+import BankService from "./BankService.mjs";
 
 class BankController {
     async create(req, res) {
         try {
-            const {name, interestRate, maxLoan, minDownPayment, loanTerm} = req.body;
-            const bank = await Bank.create({
-                name,
-                interestRate,
-                maxLoan,
-                minDownPayment,
-                loanTerm
-            });
-
+            const bank = await BankService.create(req.body)
             res.json(bank);
         } catch (err) {
             res.status(500).json(err);
@@ -20,7 +13,7 @@ class BankController {
 
     async getAll(req, res) {
         try {
-            const banks = await Bank.find();
+            const banks = await BankService.getAll();
             return res.json(banks);
         } catch (err) {
             res.status(500).json(err);
@@ -29,25 +22,21 @@ class BankController {
 
     async getOne(req, res) {
         try {
-            const id = req.params.id;
-            if(!id)
-                return res.status(400).json({message: "Missing id"});
-            const user = await Bank.findById(id);
-            return res.json(user)
-        } catch(err) {
+            const bank = await BankService.getOne(req.params.id);
+            return res.json(bank)
+        } catch (err) {
             return res.status(500).json(err)
         }
-
     }
 
     async update(req, res) {
-        try{
+        try {
             const bank = req.body;
-            if(!bank._id)
+            if (!bank._id)
                 return res.status(400).json({message: "Missing id"});
-            const updatedBank = await Bank.findByIdAndUpdate(bank._id, bank, {new: true});
+            const updatedBank = await BankService.update(bank);
             return res.json(updatedBank);
-        } catch(err) {
+        } catch (err) {
             return res.status(500).json(err)
         }
     }
@@ -55,12 +44,12 @@ class BankController {
     async delete(req, res) {
         try {
             const id = req.params.id;
-            if(!id)
+            if (!id)
                 return res.status(400).json({message: "Missing id"});
-            const deletedBank = await Bank.findByIdAndDelete(id);
+            const deletedBank = await BankService.delete(id);
             return res.json(deletedBank);
 
-        } catch(err) {
+        } catch (err) {
             return res.status(500).json(err)
         }
     }

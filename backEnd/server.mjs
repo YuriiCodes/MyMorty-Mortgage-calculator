@@ -17,17 +17,6 @@ app.use(express.json());
 app.use('/api', router);
 
 
-
-
-
-const testBank = {
-    name: "LLoyd's bank",
-    interestRate: 0.5,
-    maxLoan: 1000000,
-    minDownPayment: 100,
-    loanTerm: 12,
-}
-
 async function startApp() {
     try {
         await mongoose.connect(DB_URL);
