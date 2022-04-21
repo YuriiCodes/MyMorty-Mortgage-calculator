@@ -3,6 +3,7 @@ import BankService from "./BankService.mjs";
 
 class BankController {
     async create(req, res) {
+        console.log('create')
         try {
             const bank = await BankService.create(req.body)
             res.json(bank);
