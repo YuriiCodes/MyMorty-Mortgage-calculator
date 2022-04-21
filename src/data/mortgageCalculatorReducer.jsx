@@ -2,7 +2,7 @@ const UPDATE_SELECTED_BANK_ID = 'UPDATE_SELECTED_BANK_ID';
 const TOGGLE_IS_MONTHLY_PAYMENT_AVAILABLE = 'TOGGLE_IS_MONTHLY_PAYMENT_AVAILABLE';
 const UPDATE_MONTHLY_PAYMENT = 'UPDATE_MONTHLY_PAYMENT';
 let initialState = {
-    selectedBankId: 0,
+    selectedBankId: "625ef01d6e187a99202d531b",
     isMonthlyPaymentAvaliable: false,
     monthlyPayment:0,
 };

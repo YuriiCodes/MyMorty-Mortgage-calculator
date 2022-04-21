@@ -1,8 +1,7 @@
 import {connect} from "react-redux";
-import Banks from "./BanksAPIComponent/BanksPresentationalComponent/Banks";
 import {
     addBank,
-    deleteBank, editExistingBank,
+     editExistingBank,
     updateNewBankInterestRate, updateNewBankLoanTerm, updateNewBankMaxLoan, updateNewBankMinDownPayment,
     updateNewBankName, getBanksThunkCreator, createBankThunkCreator, updateBankThunkCreator, deleteBankThunkCreator
 } from "../../data/banksReducer";

@@ -1,4 +1,4 @@
-import {Button, Card, CardGroup, Container, ListGroup, ListGroupItem, Row, Form, Col, Offcanvas} from "react-bootstrap";
+import {Button, Card, Container, ListGroup, ListGroupItem, Row, Col, Offcanvas} from "react-bootstrap";
 
 import BankForm from "./BankForm/BankForm";
 import {useState} from "react";
@@ -54,7 +54,6 @@ const Banks = (props) => {
                                                 <Offcanvas.Body>
                                                     <BankForm handleClose={handleClose}
                                                               type="update"
-                                                              editExistingBank={props.editExistingBank}
                                                               bankUserWantsToUpdate={bankUserWantsToUpdate}
                                                               updateBank={props.updateBank}
 
@@ -82,7 +81,6 @@ const Banks = (props) => {
                                   addBank={props.addBank}
 
                                   newBank={props.newBank}
-
                                   createBank={props.createBank}
 
                         />

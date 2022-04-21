@@ -12,11 +12,13 @@ const MortgageCalculator = (props) => {
 
     const loanInput = useRef(null);
     const downPaymentInput = useRef(null);
+    debugger;
     let banks = props.banks;
 
 
-    const selectedBank = banks.find(bank => bank.id === parseInt(props.selectedBankId));
+    const selectedBank = banks.find(bank => bank.id == props.selectedBankId);
 
+    debugger;
     const schema = yup.object().shape({
         initialLoan: yup.number().required().positive().max(selectedBank.maxLoan),
         downPayment: yup.number().required().positive().min(selectedBank.minDownPayment).max(yup.ref("initialLoan")),
@@ -26,7 +28,7 @@ const MortgageCalculator = (props) => {
     return (
         <Container>
             <Row>
-                <Col md={6} >
+                <Col md={6}>
                     <Formik
                         validationSchema={schema}
                         onSubmit={console.log}
@@ -139,12 +141,16 @@ const MortgageCalculator = (props) => {
                         <Card>
                             <Card.Body>
                                 {/* We round the monthly payment to the nearest hundredth*/}
-                                <Card.Title><h2> Your monthly payment is: <span className="text-success">${props.monthlyPayment.toFixed(3)} </span> </h2></Card.Title>
+                                <Card.Title><h2> Your monthly payment is: <span
+                                    className="text-success">${props.monthlyPayment.toFixed(3)} </span></h2>
+                                </Card.Title>
                                 <Card.Text>
                                     <p>Ammount of borrowed money after down payment:
                                         ${moneyBorrowedAfterDownPayment} </p>
-                                    <p>Annual interest rate of {selectedBank.name}: <b>{selectedBank.interestRate}%</b> </p>
-                                    <p>Number of monthly payments of {selectedBank.name}: <b>{selectedBank.loanTerm}</b> </p>
+                                    <p>Annual interest rate of {selectedBank.name}: <b>{selectedBank.interestRate}%</b>
+                                    </p>
+                                    <p>Number of monthly payments of {selectedBank.name}: <b>{selectedBank.loanTerm}</b>
+                                    </p>
                                 </Card.Text>
 
                             </Card.Body>
@@ -157,8 +163,10 @@ const MortgageCalculator = (props) => {
                             <Card.Body>
                                 <Card.Title><h4>Please submit form to calculate your monthly payment </h4></Card.Title>
                                 <Card.Text>
-                                    <p>Annual interest rate of {selectedBank.name}: <b>{selectedBank.interestRate}%</b> </p>
-                                    <p>Number of monthly payments of {selectedBank.name}: <b>{selectedBank.loanTerm}</b> </p>
+                                    <p>Annual interest rate of {selectedBank.name}: <b>{selectedBank.interestRate}%</b>
+                                    </p>
+                                    <p>Number of monthly payments of {selectedBank.name}: <b>{selectedBank.loanTerm}</b>
+                                    </p>
                                 </Card.Text>
 
                             </Card.Body>

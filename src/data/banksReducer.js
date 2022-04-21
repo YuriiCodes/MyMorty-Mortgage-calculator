@@ -1,6 +1,5 @@
 import {bankAPI} from '../api/api';
 
-const GET_BANKS = 'GET_BANKS';
 const DELETE_BANK = 'DELETE_BANK';
 const UPDATE_NEW_BANK_NAME = 'UPDATE_NEW_BANK_NAME';
 const UPDATE_NEW_BANK_INTEREST_RATE = 'UPDATE_NEW_BANK_INTEREST_RATE';
@@ -11,7 +10,6 @@ const ADD_BANK = 'ADD_BANK';
 const EDIT_EXISTING_BANK = 'EDIT_EXISTING_BANK';
 
 const SET_BANKS = 'SET_BANKS';
-const UPDATE_BANK = 'UPDATE_BANK';
 
 
 /*
@@ -25,8 +23,16 @@ _id: "625ef320d4cfc629825cec5b"
 * */
 let initialState = {
     banks: [
+        // {
+        //     id: 0,
+        //     name: "LLoyd's bank",
+        //     interestRate: 0.5,
+        //     maxLoan: 1000000,
+        //     minDownPayment: 100,
+        //     loanTerm: 12,
+        // },
         {
-            id: 0,
+            id: "625ef01d6e187a99202d531b",
             name: "LLoyd's bank",
             interestRate: 0.5,
             maxLoan: 1000000,
@@ -53,10 +59,10 @@ let initialState = {
     newBank: {
         id: null,
         name: "",
-        interestRate: 0,
-        maxLoan: 0,
-        minDownPayment: 0,
-        loanTerm: 0,
+        interestRate: "",
+        maxLoan: "",
+        minDownPayment: "",
+        loanTerm: "",
     }
 };
 

@@ -7,6 +7,7 @@ import {
 } from "../../data/mortgageCalculatorReducer";
 
 const MortgageCalculatorContainer = (props) => {
+    debugger;
     return (
         <MortgageCalculator
             banks={props.banks}
