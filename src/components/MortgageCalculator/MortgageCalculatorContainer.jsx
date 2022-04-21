@@ -16,6 +16,8 @@ const MortgageCalculatorContainer = (props) => {
             updateMonthlyPayment={props.updateMonthlyPayment}
             toggleIsMonthlyPaymentAvaliable={props.toggleIsMonthlyPaymentAvaliable}
             monthlyPayment={props.monthlyPayment}
+
+            defaultBankId={props.defaultBankId}
         />
     )
 }
@@ -24,7 +26,8 @@ const mapStateToProps = (state) => {
         banks: state.banksInfo.banks,
         selectedBankId: state.mortageCalculator.selectedBankId,
         isMonthlyPaymentAvaliable: state.mortageCalculator.isMonthlyPaymentAvaliable,
-        monthlyPayment: state.mortageCalculator.monthlyPayment
+        monthlyPayment: state.mortageCalculator.monthlyPayment,
+        defaultBankId: state.mortageCalculator.defaultBankId
     }
 }
 export default connect(mapStateToProps, {updateSelectedBankId, toggleIsMonthlyPaymentAvaliable, updateMonthlyPayment})(MortgageCalculatorContainer)

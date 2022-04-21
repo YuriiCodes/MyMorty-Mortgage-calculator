@@ -16,7 +16,7 @@ const MortgageCalculator = (props) => {
     let banks = props.banks;
 
 
-    const selectedBank = banks.find(bank => bank.id == props.selectedBankId);
+    const selectedBank = banks.find(bank => bank.id == props.selectedBankId) || props.defaultBankId;
 
 
     const schema = yup.object().shape({

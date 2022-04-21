@@ -5,6 +5,7 @@ let initialState = {
     selectedBankId: "625ef01d6e187a99202d531b",
     isMonthlyPaymentAvaliable: false,
     monthlyPayment:0,
+    defaultBankId: "625ef01d6e187a99202d531b"
 };
 
 const mortgageCalculatorReducer = (state = initialState, action) => {
