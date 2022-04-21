@@ -9,13 +9,14 @@ import {Container} from "react-bootstrap";
 import BanksContainer from "./components/Banks/BanksContainer";
 import MortageCalculatorContainer from "./components/MortgageCalculator/MortgageCalculatorContainer";
 import Footer from "./components/Footer/Footer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 const App = () => (
     <BrowserRouter>
 
     <div className="App">
         <Container>
-            <Header/>
+            <HeaderContainer/>
 
             <Routes>
                 <Route exact path="/"

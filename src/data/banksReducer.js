@@ -23,14 +23,7 @@ _id: "625ef320d4cfc629825cec5b"
 * */
 let initialState = {
     banks: [
-        // {
-        //     id: 0,
-        //     name: "LLoyd's bank",
-        //     interestRate: 0.5,
-        //     maxLoan: 1000000,
-        //     minDownPayment: 100,
-        //     loanTerm: 12,
-        // },
+        // Default bank that user can't delete.
         {
             id: "625ef01d6e187a99202d531b",
             name: "LLoyd's bank",
@@ -39,22 +32,6 @@ let initialState = {
             minDownPayment: 100,
             loanTerm: 12,
         },
-        // {
-        //     id: 1,
-        //     name: "JPMorgan Chase",
-        //     interestRate: 0.4,
-        //     maxLoan: 700000,
-        //     minDownPayment: 40000,
-        //     loanTerm: 12,
-        // },
-        // {
-        //     id: 2,
-        //     name: "Citigroup",
-        //     interestRate: 0.6,
-        //     maxLoan: 2000000,
-        //     minDownPayment: 80000,
-        //     loanTerm: 23,
-        // }
     ],
     newBank: {
         id: null,
@@ -157,6 +134,10 @@ export default banksReducer;
 
 //action creators
 export const deleteBank = (bankId) => {
+    if (bankId === initialState.banks[0].id){
+        alert("This bank is default and cannot be deleted");
+        return;
+    }
     return {
         type: DELETE_BANK,
         bankId
