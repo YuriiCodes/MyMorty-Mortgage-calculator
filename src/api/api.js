@@ -26,7 +26,6 @@ export const bankAPI = {
             });
     },
     create: (bank) => {
-        debugger;
         return instance.post('banks', bank)
             .then(res => res.data)
             .catch(err => {

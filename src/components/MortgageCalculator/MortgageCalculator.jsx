@@ -12,13 +12,13 @@ const MortgageCalculator = (props) => {
 
     const loanInput = useRef(null);
     const downPaymentInput = useRef(null);
-    debugger;
+
     let banks = props.banks;
 
 
     const selectedBank = banks.find(bank => bank.id == props.selectedBankId);
 
-    debugger;
+
     const schema = yup.object().shape({
         initialLoan: yup.number().required().positive().max(selectedBank.maxLoan),
         downPayment: yup.number().required().positive().min(selectedBank.minDownPayment).max(yup.ref("initialLoan")),

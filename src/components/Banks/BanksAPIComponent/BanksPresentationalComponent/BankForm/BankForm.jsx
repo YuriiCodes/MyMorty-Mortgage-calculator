@@ -114,7 +114,6 @@ const BankForm = (props) => {
                             };
 
 
-                            debugger;
                             props.createBank(newBankObj);
                             // props.addBank();
 
@@ -129,7 +128,7 @@ const BankForm = (props) => {
                                 "loanTerm": editedBankLoanTerm,
                                 "_id": props.bankUserWantsToUpdate.id
                             };
-                            debugger;
+
                             props.updateBank(newBankObj);
 
                             // close the modal if update successfull

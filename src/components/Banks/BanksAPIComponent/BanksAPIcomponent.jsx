@@ -3,12 +3,6 @@ import Banks from "./BanksPresentationalComponent/Banks";
 
 class BanksAPIComponent extends React.Component {
 
-    componentDidMount() {
-        this.props.getBanks();
-    }
-
-
-
     render() {
 
         return (

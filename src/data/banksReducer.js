@@ -218,6 +218,7 @@ export const createBankThunkCreator = (newBank) => {
     debugger;
     return (dispatch) => {
         bankAPI.create(newBank).then(data => {
+            console.log(data)
             dispatch(addBank());
         })
     }
