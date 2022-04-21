@@ -3,12 +3,12 @@ import axios from 'axios';
 
 // Axios instance for api calls
 const instance = axios.create({
-    baseURL: "https://my-morty-backend.herokuapp.com/api/",
+    baseURL: "https://my-morty-backend.herokuapp.com/api",
 })
 
 export const bankAPI = {
     getAll: () => {
-        return instance.get('banks')
+        return instance.get('banks', { mode: 'cors' })
             .then(res => res.data);
     },
     delete: (id) => {

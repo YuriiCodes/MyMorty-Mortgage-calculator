@@ -1,3 +1,4 @@
+import {bankAPI} from '../api/api';
 
 const GET_BANKS = 'GET_BANKS';
 const DELETE_BANK = 'DELETE_BANK';
@@ -8,6 +9,9 @@ const UPDATE_NEW_BANK_MIN_DOWN_PAYMENT = 'UPDATE_NEW_BANK_MIN_DOWN_PAYMENT';
 const UPDATE_NEW_BANK_LOAN_TERM = 'UPDATE_NEW_BANK_LOAN_TERM';
 const ADD_BANK = 'ADD_BANK';
 const EDIT_EXISTING_BANK = 'EDIT_EXISTING_BANK';
+
+const SET_BANKS = 'SET_BANKS';
+
 
 let initialState = {
     banks: [
@@ -60,28 +64,28 @@ const banksReducer = (state = initialState, action) => {
                 }
             };
         case UPDATE_NEW_BANK_INTEREST_RATE:
-            return{
+            return {
                 ...state, newBank: {
                     ...state.newBank,
                     interestRate: action.interestRate
                 }
             }
         case UPDATE_NEW_BANK_MAX_LOAN:
-            return{
+            return {
                 ...state, newBank: {
                     ...state.newBank,
                     maxLoan: action.maxLoan
                 }
             }
         case UPDATE_NEW_BANK_MIN_DOWN_PAYMENT:
-            return{
+            return {
                 ...state, newBank: {
                     ...state.newBank,
                     minDownPayment: action.minDownPayment
                 }
             }
         case UPDATE_NEW_BANK_LOAN_TERM:
-            return{
+            return {
                 ...state, newBank: {
                     ...state.newBank,
                     loanTerm: action.loanTerm
@@ -117,6 +121,11 @@ const banksReducer = (state = initialState, action) => {
                     }
                 })
             };
+        case SET_BANKS:
+            return {
+                ...state, banks: [...action.banks]
+            };
+
         default:
             return state;
     }
@@ -166,7 +175,7 @@ export const addBank = () => {
         type: ADD_BANK
     };
 };
-export const editExistingBank = (bankId, name,  interestRate, maxLoan, minDownPayment, loanTerm) => {
+export const editExistingBank = (bankId, name, interestRate, maxLoan, minDownPayment, loanTerm) => {
     return {
         type: EDIT_EXISTING_BANK,
         bankId,
@@ -176,4 +185,19 @@ export const editExistingBank = (bankId, name,  interestRate, maxLoan, minDownPa
         minDownPayment,
         loanTerm
     };
+};
+export const setBanks = (banks) => {
+    return {
+        type: SET_BANKS,
+        banks
+    };
+};
+
+export const getBanksThunkCreator = () => {
+    return  (dispatch) => {
+        bankAPI.getAll().then(data => {
+            console.log(data)
+            dispatch(setBanks(data))
+        })
+    }
 };
