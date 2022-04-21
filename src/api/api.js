@@ -3,8 +3,8 @@ import axios from 'axios';
 
 // Axios instance for api calls
 const instance = axios.create({
-    // baseURL: "https://my-morty-backend.herokuapp.com/api",
-    baseURL: "http://localhost:8000/api",
+    baseURL: "https://my-morty-backend.herokuapp.com/api",
+    // baseURL: "http://localhost:8000/api",
     config: {
         mode: 'cors'
     }
