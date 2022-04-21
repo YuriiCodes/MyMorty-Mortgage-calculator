@@ -11,8 +11,18 @@ const ADD_BANK = 'ADD_BANK';
 const EDIT_EXISTING_BANK = 'EDIT_EXISTING_BANK';
 
 const SET_BANKS = 'SET_BANKS';
+const UPDATE_BANK = 'UPDATE_BANK';
 
 
+/*
+* interestRate: 0.8
+loanTerm: 12
+maxLoan: 8000000
+minDownPayment: 5100
+name: "Mono"
+__v: 0
+_id: "625ef320d4cfc629825cec5b"
+* */
 let initialState = {
     banks: [
         {
@@ -23,22 +33,22 @@ let initialState = {
             minDownPayment: 100,
             loanTerm: 12,
         },
-        {
-            id: 1,
-            name: "JPMorgan Chase",
-            interestRate: 0.4,
-            maxLoan: 700000,
-            minDownPayment: 40000,
-            loanTerm: 12,
-        },
-        {
-            id: 2,
-            name: "Citigroup",
-            interestRate: 0.6,
-            maxLoan: 2000000,
-            minDownPayment: 80000,
-            loanTerm: 23,
-        }
+        // {
+        //     id: 1,
+        //     name: "JPMorgan Chase",
+        //     interestRate: 0.4,
+        //     maxLoan: 700000,
+        //     minDownPayment: 40000,
+        //     loanTerm: 12,
+        // },
+        // {
+        //     id: 2,
+        //     name: "Citigroup",
+        //     interestRate: 0.6,
+        //     maxLoan: 2000000,
+        //     minDownPayment: 80000,
+        //     loanTerm: 23,
+        // }
     ],
     newBank: {
         id: null,
@@ -54,7 +64,7 @@ const banksReducer = (state = initialState, action) => {
     switch (action.type) {
         case DELETE_BANK:
             return {
-                ...state, banks: state.banks.filter(bank => bank.id !== action.bankId)
+                ...state, banks: state.banks.filter(bank => bank._id !== action.bankId)
             };
         case UPDATE_NEW_BANK_NAME:
             return {
@@ -92,10 +102,10 @@ const banksReducer = (state = initialState, action) => {
                 }
             }
         case ADD_BANK:
-            state.newBank.id = state.banks.length;
+            state.newBank._id = state.banks.length;
             return {
                 ...state, banks: [...state.banks, state.newBank], newBank: {
-                    id: null,
+                    _id: null,
                     name: "",
                     interestRate: "",
                     maxLoan: "",
@@ -107,7 +117,7 @@ const banksReducer = (state = initialState, action) => {
         case EDIT_EXISTING_BANK:
             return {
                 ...state, banks: state.banks.map(bank => {
-                    if (bank.id === action.bankId) {
+                    if (bank._id === action.bankId) {
                         return {
                             ...bank,
                             name: action.name,
@@ -122,10 +132,15 @@ const banksReducer = (state = initialState, action) => {
                 })
             };
         case SET_BANKS:
+            //convert action.banks to array, change _id to id (to convert from mongo id to normal id)
             return {
-                ...state, banks: [...action.banks]
+                ...state, banks: action.banks.map(bank => {
+                    return {
+                        ...bank,
+                        id: bank._id
+                    }
+                })
             };
-
         default:
             return state;
     }
@@ -196,8 +211,15 @@ export const setBanks = (banks) => {
 export const getBanksThunkCreator = () => {
     return  (dispatch) => {
         bankAPI.getAll().then(data => {
-            console.log(data)
             dispatch(setBanks(data))
+        })
+    }
+};
+
+export const createBankThunkCreator = (newBank) => {
+    return (dispatch, newBank) => {
+        bankAPI.create(newBank).then(data => {
+            dispatch(addBank());
         })
     }
 };
