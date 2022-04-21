@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/MyMorty-Mortgage-calculator/static/css/main.09488952.css",
-    "main.js": "/MyMorty-Mortgage-calculator/static/js/main.aea17313.js",
+    "main.js": "/MyMorty-Mortgage-calculator/static/js/main.081cea67.js",
     "static/js/787.8e1c7fb9.chunk.js": "/MyMorty-Mortgage-calculator/static/js/787.8e1c7fb9.chunk.js",
     "index.html": "/MyMorty-Mortgage-calculator/index.html",
     "main.09488952.css.map": "/MyMorty-Mortgage-calculator/static/css/main.09488952.css.map",
-    "main.aea17313.js.map": "/MyMorty-Mortgage-calculator/static/js/main.aea17313.js.map",
+    "main.081cea67.js.map": "/MyMorty-Mortgage-calculator/static/js/main.081cea67.js.map",
     "787.8e1c7fb9.chunk.js.map": "/MyMorty-Mortgage-calculator/static/js/787.8e1c7fb9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.09488952.css",
-    "static/js/main.aea17313.js"
+    "static/js/main.081cea67.js"
   ]
 }
