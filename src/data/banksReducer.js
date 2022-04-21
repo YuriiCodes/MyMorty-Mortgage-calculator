@@ -217,7 +217,8 @@ export const getBanksThunkCreator = () => {
 };
 
 export const createBankThunkCreator = (newBank) => {
-    return (dispatch, newBank) => {
+    debugger;
+    return (dispatch) => {
         bankAPI.create(newBank).then(data => {
             dispatch(addBank());
         })

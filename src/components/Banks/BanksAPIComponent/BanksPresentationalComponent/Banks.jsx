@@ -13,6 +13,7 @@ const Banks = (props) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+
     return (
         <Container className="mt-4" >
             <Row>
@@ -80,6 +81,8 @@ const Banks = (props) => {
                                   addBank={props.addBank}
 
                                   newBank={props.newBank}
+
+                                  createBank={props.createBank}
 
                         />
                     </Card>

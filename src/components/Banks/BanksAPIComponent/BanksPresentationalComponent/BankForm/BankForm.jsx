@@ -27,37 +27,37 @@ const BankForm = (props) => {
     const UPDATE = "update";
 
     const handleBankNameChange = (e) => {
-        if(type===ADD){
+        if (type === ADD) {
             props.updateNewBankName(e.target.value);
-        } else if(type===UPDATE){
+        } else if (type === UPDATE) {
             setEditedBankName(e.target.value);
         }
     };
     const handeBankInterestChange = (e) => {
-        if(type===ADD) {
+        if (type === ADD) {
             props.updateNewBankInterestRate(parseInt(e.target.value));
-        } else if(type===UPDATE){
+        } else if (type === UPDATE) {
             setEditedBankInterestRate(parseInt(e.target.value));
         }
     }
     const handleBankMaxLoanChange = (e) => {
-        if(type===ADD) {
+        if (type === ADD) {
             props.updateNewBankMaxLoan(parseInt(e.target.value));
-        } else if(type===UPDATE){
+        } else if (type === UPDATE) {
             setEditedBankMaxLoan(parseInt(e.target.value));
         }
     }
     const handleBankMinDownPaymentChange = (e) => {
-        if(type===ADD) {
+        if (type === ADD) {
             props.updateNewBankMinDownPayment(parseInt(e.target.value));
-        } else if(type===UPDATE){
+        } else if (type === UPDATE) {
             setEditedBankMinDownPayment(parseInt(e.target.value));
         }
     }
     const handleBankLoanTermChange = (e) => {
-        if(type===ADD) {
+        if (type === ADD) {
             props.updateNewBankLoanTerm(parseInt(e.target.value));
-        } else if(type===UPDATE){
+        } else if (type === UPDATE) {
             setEditedBankLoanTerm(parseInt(e.target.value));
         }
     }
@@ -80,15 +80,47 @@ const BankForm = (props) => {
                   isValid,
                   errors,
               }) => (
+
+
+                /* newBank:
+                    id: null
+                    interestRate: 21
+                    loanTerm: 1
+                    maxLoan: 1
+                    minDownPayment: 2
+                    name: "12"
+
+                    */
+
+                /*Needed format:
+                   "name": "test22",
+                    "interestRate": 122,
+                    "maxLoan": 500010,
+                    "minDownPayment": 30000,
+                    "loanTerm": 12
+                * */
                 <Form className="p-2" noValidate onSubmit={(e) => {
                     handleSubmit(e);
-                    if(type===ADD){
-                        if(inputEl.current.value && !errors.bankName && !errors.interestRate && !errors.maxLoan && !errors.minDownPayment && !errors.loanTerm) {
-                            props.addBank();
+                    if (type === ADD) {
+                        if (inputEl.current.value && !errors.bankName && !errors.interestRate && !errors.maxLoan && !errors.minDownPayment && !errors.loanTerm) {
+
+                            // we will send this object converted to JSON to server
+                            const newBankObj = {
+                                "name": props.newBank.name,
+                                "interestRate": props.newBank.interestRate,
+                                "maxLoan": props.newBank.maxLoan,
+                                "minDownPayment": props.newBank.minDownPayment,
+                                "loanTerm": props.newBank.loanTerm,
+                            };
+
+
+                            debugger;
+                            props.createBank(newBankObj);
+                            // props.addBank();
+
                         }
-                    }
-                    else if(type===UPDATE){
-                        if(inputEl.current.value && !errors.bankName && !errors.interestRate && !errors.maxLoan && !errors.minDownPayment && !errors.loanTerm) {
+                    } else if (type === UPDATE) {
+                        if (inputEl.current.value && !errors.bankName && !errors.interestRate && !errors.maxLoan && !errors.minDownPayment && !errors.loanTerm) {
                             props.editExistingBank(
                                 props.bankUserWantsToUpdate.id,
                                 editedBankName,
@@ -104,16 +136,16 @@ const BankForm = (props) => {
 
 
                 }}>
-                    {type===ADD?<h1>Add bank</h1> : null}
+                    {type === ADD ? <h1>Add bank</h1> : null}
 
                     <Form.Group className="mb-2" controlId="validationFormikBankName">
                         <Form.Label>Bank name</Form.Label>
                         <InputGroup hasValidation id="validationFormikBankName">
                             <Form.Control type="text"
-                                          placeholder={type===ADD?"Monobank":props.bankUserWantsToUpdate.name }
+                                          placeholder={type === ADD ? "Monobank" : props.bankUserWantsToUpdate.name}
                                           aria-describedby="validationFormikBankName"
                                           name="bankName"
-                                          value={type===ADD? props.newBank.name : editedBankName}
+                                          value={type === ADD ? props.newBank.name : editedBankName}
                                           ref={inputEl}
                                           onChange={(e) => {
                                               handleChange(e);
@@ -132,18 +164,18 @@ const BankForm = (props) => {
                     <Form.Group className="mb-2" controlId="validationFormikInterestRate">
                         <Form.Label>Interest rate, %</Form.Label>
                         <InputGroup hasValidation id="inputGroupInterestRate">
-                              <Form.Control type="number"
-                                            placeholder={type===ADD? "2.3": props.bankUserWantsToUpdate.interestRate}
-                                            aria-describedby="inputGroupInterestRate"
-                                            name="interestRate"
-                                            value={type===ADD? props.newBank.interestRate: editedBankInterestRate}
+                            <Form.Control type="number"
+                                          placeholder={type === ADD ? "2.3" : props.bankUserWantsToUpdate.interestRate}
+                                          aria-describedby="inputGroupInterestRate"
+                                          name="interestRate"
+                                          value={type === ADD ? props.newBank.interestRate : editedBankInterestRate}
 
-                                            onChange={(e) => {
-                                                handleChange(e);
-                                                handeBankInterestChange(e);
-                                            }}
-                                            isInvalid={!!errors.interestRate}
-                              />
+                                          onChange={(e) => {
+                                              handleChange(e);
+                                              handeBankInterestChange(e);
+                                          }}
+                                          isInvalid={!!errors.interestRate}
+                            />
                             <Form.Control.Feedback type="invalid">
                                 {errors.interestRate}
                             </Form.Control.Feedback>
@@ -151,22 +183,21 @@ const BankForm = (props) => {
                     </Form.Group>
 
 
-
                     <Form.Group className="mb-2" controlId="validationFormikMaxLoan">
                         <Form.Label>Max Loan, $</Form.Label>
                         <InputGroup hasValidation id="inputGroupMaxLoan">
                             <Form.Control type="number"
-                                          placeholder={type===ADD? "400000" : props.bankUserWantsToUpdate.maxLoan}
-                                          value={type===ADD? props.newBank.maxLoan : editedBankMaxLoan}
+                                          placeholder={type === ADD ? "400000" : props.bankUserWantsToUpdate.maxLoan}
+                                          value={type === ADD ? props.newBank.maxLoan : editedBankMaxLoan}
                                           name="maxLoan"
-                                          // value={values.maxLoan}
+                                // value={values.maxLoan}
 
                                           onChange={e => {
                                               handleChange(e);
                                               handleBankMaxLoanChange(e);
                                           }}
                                           aria-describedby="inputGroupMaxLoan"
-                                          isInvalid={!!errors.maxLoan }
+                                          isInvalid={!!errors.maxLoan}
                             />
                             <Form.Control.Feedback type="invalid">
                                 {errors.maxLoan}
@@ -175,20 +206,19 @@ const BankForm = (props) => {
                     </Form.Group>
 
 
-
                     <Form.Group className="mb-2" controlId="validationFormikMinDownPayment">
                         <Form.Label>Min down payment, $</Form.Label>
                         <InputGroup hasValidation id="inputGroupMinDownPayment">
                             <Form.Control type="number"
-                                          placeholder={type===ADD? "30000": props.bankUserWantsToUpdate.minDownPayment}
+                                          placeholder={type === ADD ? "30000" : props.bankUserWantsToUpdate.minDownPayment}
                                           name="minDownPayment"
-                                          value={type===ADD? props.newBank.minDownPayment: editedBankMinDownPayment}
+                                          value={type === ADD ? props.newBank.minDownPayment : editedBankMinDownPayment}
                                           onChange={e => {
                                               handleChange(e);
                                               handleBankMinDownPaymentChange(e);
                                           }}
                                           aria-describedby="inputGroupMinDownPayment"
-                                          isInvalid={!!errors.minDownPayment }
+                                          isInvalid={!!errors.minDownPayment}
                             />
                             <Form.Control.Feedback type="invalid">
                                 {errors.minDownPayment}
@@ -201,15 +231,15 @@ const BankForm = (props) => {
                         <Form.Label>Loan term, months</Form.Label>
                         <InputGroup hasValidation id="inputGroupLoanTerm">
                             <Form.Control type="number"
-                                          placeholder={type===ADD? "36": props.bankUserWantsToUpdate.loanTerm}
+                                          placeholder={type === ADD ? "36" : props.bankUserWantsToUpdate.loanTerm}
                                           name="loanTerm"
-                                            value={type===ADD? props.newBank.loanTerm: editedBankLoanTerm}
+                                          value={type === ADD ? props.newBank.loanTerm : editedBankLoanTerm}
                                           onChange={e => {
                                               handleChange(e);
                                               handleBankLoanTermChange(e);
                                           }}
                                           aria-describedby="inputGroupLoanTerm"
-                                          isInvalid={!!errors.loanTerm }
+                                          isInvalid={!!errors.loanTerm}
                             />
                             <Form.Control.Feedback type="invalid">
                                 {errors.loanTerm}
@@ -217,7 +247,7 @@ const BankForm = (props) => {
                         </InputGroup>
                     </Form.Group>
 
-                    {type===ADD?
+                    {type === ADD ?
                         <Button variant="primary" type="submit">
                             Add
                         </Button>

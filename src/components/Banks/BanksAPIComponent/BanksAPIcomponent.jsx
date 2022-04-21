@@ -8,6 +8,7 @@ class BanksAPIComponent extends React.Component {
     }
 
 
+
     render() {
 
         return (
@@ -22,7 +23,9 @@ class BanksAPIComponent extends React.Component {
                        addBank={this.props.addBank}
 
                        newBank={this.props.newBank}
-                       editExistingBank={this.  props.editExistingBank}
+                       editExistingBank={this.props.editExistingBank}
+
+                       createBank={this.props.createBank}
                 />
 
             </>)
