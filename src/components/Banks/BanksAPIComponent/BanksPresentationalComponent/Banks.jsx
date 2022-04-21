@@ -43,7 +43,7 @@ const Banks = (props) => {
                                                 setBankUserWantsToUpdate(bank);
                                             }}>Edit bank</Button>
                                             <Button variant="outline-danger" onClick={() => {
-                                                props.deleteBank(bank.id)
+                                                props.deleteBank(bank.id);
                                             }}>Delete bank</Button>
 
 
@@ -56,6 +56,7 @@ const Banks = (props) => {
                                                               type="update"
                                                               editExistingBank={props.editExistingBank}
                                                               bankUserWantsToUpdate={bankUserWantsToUpdate}
+                                                              updateBank={props.updateBank}
 
                                                     />
                                                 </Offcanvas.Body>

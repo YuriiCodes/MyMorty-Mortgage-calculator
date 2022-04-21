@@ -102,7 +102,7 @@ const banksReducer = (state = initialState, action) => {
                 }
             }
         case ADD_BANK:
-            state.newBank._id = state.banks.length;
+            state.newBank.id = state.banks.length;
             return {
                 ...state, banks: [...state.banks, state.newBank], newBank: {
                     _id: null,
@@ -147,6 +147,9 @@ const banksReducer = (state = initialState, action) => {
 };
 
 export default banksReducer;
+
+
+//action creators
 export const deleteBank = (bankId) => {
     return {
         type: DELETE_BANK,
@@ -208,6 +211,14 @@ export const setBanks = (banks) => {
     };
 };
 
+
+
+
+
+
+
+
+//thunks
 export const getBanksThunkCreator = () => {
     return  (dispatch) => {
         bankAPI.getAll().then(data => {
@@ -224,3 +235,20 @@ export const createBankThunkCreator = (newBank) => {
         })
     }
 };
+
+export const updateBankThunkCreator = (updatedBank) => {
+    debugger;
+    return (dispatch) => {
+        bankAPI.update(updatedBank).then(data => {
+            dispatch(editExistingBank(updatedBank._id, updatedBank.name, updatedBank.interestRate, updatedBank.maxLoan, updatedBank.minDownPayment, updatedBank.loanTerm));
+        })
+    }
+};
+
+export const deleteBankThunkCreator = (bankId) => {
+    return (dispatch) => {
+        bankAPI.delete(bankId).then(data => {
+            dispatch(deleteBank(bankId));
+        })
+    }
+}

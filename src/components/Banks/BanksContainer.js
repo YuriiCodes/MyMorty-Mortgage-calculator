@@ -4,7 +4,7 @@ import {
     addBank,
     deleteBank, editExistingBank,
     updateNewBankInterestRate, updateNewBankLoanTerm, updateNewBankMaxLoan, updateNewBankMinDownPayment,
-    updateNewBankName, getBanksThunkCreator, createBankThunkCreator
+    updateNewBankName, getBanksThunkCreator, createBankThunkCreator, updateBankThunkCreator, deleteBankThunkCreator
 } from "../../data/banksReducer";
 import BanksAPIComponent from "./BanksAPIComponent/BanksAPIcomponent";
 
@@ -26,6 +26,7 @@ const BanksContainer = (props) => {
 
                            getBanks={props.getBanks}
                            createBank={props.createBank}
+                           updateBank={props.updateBank}
 
         />
     )
@@ -39,7 +40,7 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    deleteBank,
+    // deleteBank,
     updateNewBankName,
     updateNewBankInterestRate,
     updateNewBankMaxLoan,
@@ -49,5 +50,7 @@ export default connect(mapStateToProps, {
     editExistingBank,
 
     getBanks: getBanksThunkCreator,
-    createBank: createBankThunkCreator
+    createBank: createBankThunkCreator,
+    updateBank: updateBankThunkCreator,
+    deleteBank: deleteBankThunkCreator
 })(BanksContainer);

@@ -26,6 +26,8 @@ class BanksAPIComponent extends React.Component {
                        editExistingBank={this.props.editExistingBank}
 
                        createBank={this.props.createBank}
+                       updateBank={this.props.updateBank}
+                       deleteBank={this.props.deleteBank}
                 />
 
             </>)

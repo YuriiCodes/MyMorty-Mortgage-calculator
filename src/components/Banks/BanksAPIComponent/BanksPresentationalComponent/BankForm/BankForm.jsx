@@ -121,14 +121,17 @@ const BankForm = (props) => {
                         }
                     } else if (type === UPDATE) {
                         if (inputEl.current.value && !errors.bankName && !errors.interestRate && !errors.maxLoan && !errors.minDownPayment && !errors.loanTerm) {
-                            props.editExistingBank(
-                                props.bankUserWantsToUpdate.id,
-                                editedBankName,
-                                editedBankInterestRate,
-                                editedBankMaxLoan,
-                                editedBankMinDownPayment,
-                                editedBankLoanTerm,
-                            );
+                            const newBankObj = {
+                                "name": editedBankName,
+                                "interestRate": editedBankInterestRate,
+                                "maxLoan": editedBankMaxLoan,
+                                "minDownPayment": editedBankMinDownPayment,
+                                "loanTerm": editedBankLoanTerm,
+                                "_id": props.bankUserWantsToUpdate.id
+                            };
+                            debugger;
+                            props.updateBank(newBankObj);
+
                             // close the modal if update successfull
                             props.handleClose();
                         }
