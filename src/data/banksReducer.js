@@ -85,7 +85,7 @@ const banksReducer = (state = initialState, action) => {
                 }
             }
         case ADD_BANK:
-            state.newBank.id = state.banks.length;
+            state.newBank.id = action.bankId;
             return {
                 ...state, banks: [...state.banks, state.newBank], newBank: {
                     _id: null,
@@ -175,9 +175,10 @@ export const updateNewBankLoanTerm = (loanTerm) => {
         loanTerm
     }
 }
-export const addBank = () => {
+export const addBank = (bankId) => {
     return {
-        type: ADD_BANK
+        type: ADD_BANK,
+        bankId
     };
 };
 export const editExistingBank = (bankId, name, interestRate, maxLoan, minDownPayment, loanTerm) => {
@@ -219,7 +220,7 @@ export const createBankThunkCreator = (newBank) => {
     return (dispatch) => {
         bankAPI.create(newBank).then(data => {
             console.log(data)
-            dispatch(addBank());
+            dispatch(addBank(data._id));
         })
     }
 };
