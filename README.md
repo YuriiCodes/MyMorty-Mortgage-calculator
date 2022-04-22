@@ -1,4 +1,4 @@
-#MyMorty is a mortage calculating app written with React and Redux. 
+# MyMorty is a mortage calculating app written with React and Redux. 
 To start the project, see instructions below, or simply visit  [open link](https://yuriicodes.github.io/MyMorty-Mortgage-calculator/).
 This project is fully open source, you can see the backend code here: [open link](https://github.com/YuriiCodes/my-morty-backend).
 
