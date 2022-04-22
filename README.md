@@ -1,5 +1,8 @@
-# Getting Started with Create React App
+#MyMorty is a mortage calculating app written with React and Redux. 
+To start the project, see instructions below, or simply visit  [open link](https://yuriicodes.github.io/MyMorty-Mortgage-calculator/).
+This project is fully open source, you can see the backend code here: [open link](https://github.com/YuriiCodes/my-morty-backend).
 
+## Getting Started with Create React App
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 It also was published to GitHub Pages, so you can view it [Here](https://yuriicodes.github.io/MyMorty-Mortgage-calculator/)
 
